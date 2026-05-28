@@ -29,7 +29,7 @@ jobs:
           SF_PASSWORD:       ${{ secrets.SF_PASSWORD }}
           SF_TOKEN:          ${{ secrets.SF_TOKEN }}
           SF_CONSUMER_KEY:   ${{ secrets.SF_CONSUMER_KEY }}
-          SF_CONSUMER_SECRET:${{ secrets.SF_CONSUMER_SECRET }}
+          SF_CONSUMER_SECRET: ${{ secrets.SF_CONSUMER_SECRET }}
         run: python build.py
 
       - name: Commit and push the rebuilt HTML
