@@ -10,7 +10,7 @@ from simple_salesforce import Salesforce
 
 # ── CONFIG ─────────────────────────────────────────────────────
 # Replace this with your actual Report ID from Step 1.1
-REPORT_ID = "YOUR_REPORT_ID_HERE"
+REPORT_ID = "00ON100000EZ3MLMA1"
 
 # ── CONNECT TO SALESFORCE ──────────────────────────────────────
 sf = Salesforce(
@@ -24,8 +24,15 @@ print("✓ Connected to Salesforce")
 
 # ── FETCH REPORT ───────────────────────────────────────────────
 # includeDetails=true returns every individual row
-url = f"{sf.base_url}analytics/reports/{REPORT_ID}?includeDetails=true"
-response = sf._call_salesforce("GET", url)
+import requests as _requests
+
+headers = {
+    "Authorization": f"Bearer {sf.session_id}",
+    "Content-Type": "application/json",
+}
+url = f"https://sitetracker-libertycharge.my.salesforce.com/services/data/v59.0/analytics/reports/{REPORT_ID}?includeDetails=true"
+response = _requests.get(url, headers=headers)
+response.raise_for_status()
 report_data = response.json()
 
 # Extract column headers
